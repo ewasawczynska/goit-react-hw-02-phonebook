@@ -1,15 +1,16 @@
 import { StyledButton } from './Button.styled';
 import PropTypes from 'prop-types';
 
-export default function Button({ children, handler }) {
+export default function Button(props) {
+  const { type = 'button', handler = null, children: text } = props;
   return (
-    <StyledButton type="button" onClick="handler">
-      {children}
+    <StyledButton type={type} onClick={handler}>
+      {text}
     </StyledButton>
   );
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
-  handler: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
 };

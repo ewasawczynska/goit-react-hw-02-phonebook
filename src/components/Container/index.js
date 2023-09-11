@@ -1,3 +1,3 @@
-import Container from './Containter';
+import Container from './Container';
 
 export { Container };
