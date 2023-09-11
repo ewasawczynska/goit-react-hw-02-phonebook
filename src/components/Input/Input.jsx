@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyledInput } from './Input.styled';
+import { ErrorMessage, StyledInput } from './Input.styled';
 import PropTypes from 'prop-types';
 
 export default class Input extends Component {
@@ -21,20 +21,33 @@ export default class Input extends Component {
   render() {
     const { type, name, pattern, title, placeholder, required } = this.props;
     const { value } = this.state;
+    const valid = value === '' || this.checkInputValid();
+    const inputClassName = value != '' ? (valid ? 'valid' : 'invalid') : '';
     return (
-      <StyledInput
-        type={type}
-        name={name}
-        pattern={pattern}
-        title={title}
-        placeholder={placeholder}
-        value={value}
-        onChange={this.handleChange}
-      ></StyledInput>
+      <div>
+        <StyledInput
+          type={type}
+          name={name}
+          pattern={pattern}
+          title={title}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+          onChange={this.handleChange}
+          className={inputClassName}
+        />
+        {!valid ? <ErrorMessage>{title}</ErrorMessage> : null}
+      </div>
     );
   }
 }
 
-// Input.propTypes = {
-
-// }
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  pattern: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
+  required: PropTypes.bool.isRequired,
+};
