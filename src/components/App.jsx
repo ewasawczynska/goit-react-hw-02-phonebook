@@ -42,6 +42,8 @@ export default class App extends Component {
         contacts: [...prevState.contacts, newContact],
       }));
       form.reset();
+    } else {
+      alert(`${name} already exists!`);
     }
 
     e.preventDefault();
