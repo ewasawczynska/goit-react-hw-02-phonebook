@@ -1,8 +1,12 @@
 import { StyledContact } from './ContactProfile.styled';
 import PropTypes from 'prop-types';
 
-export default function ContactProfile({ id, name }) {
-  return <StyledContact>{name}</StyledContact>;
+export default function ContactProfile({ id, name, number }) {
+  return (
+    <StyledContact>
+      {name}: {number}
+    </StyledContact>
+  );
 }
 
 ContactProfile.propTypes = {

@@ -7,17 +7,19 @@ import { nanoid } from 'nanoid';
 export default class App extends Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson' },
-      { id: 'id-2', name: 'Hermione Kline' },
-      { id: 'id-3', name: 'Eden Clements' },
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     ],
     name: '',
+    number: '',
   };
 
   addNewContact = e => {
     const form = e.target;
     const {
       name: { value: name },
+      number: { value: number },
     } = form.elements;
 
     const existingContact = this.checkIfContactExist(name);
@@ -26,6 +28,7 @@ export default class App extends Component {
       const newContact = {
         id: nanoid(),
         name,
+        number,
       };
       this.setState(prevState => ({
         contacts: [...prevState.contacts, newContact],

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 export default function Contacts({ contacts }) {
   return (
     <ul>
-      {contacts.map(({ id, name }) => (
-        <ContactProfile key={id} id={id} name={name} />
+      {contacts.map(({ id, name, number }) => (
+        <ContactProfile key={id} id={id} name={name} number={number} />
       ))}
     </ul>
   );
