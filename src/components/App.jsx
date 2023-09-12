@@ -60,6 +60,18 @@ export default class App extends Component {
     this.setState({ filter: e.target.value });
   };
 
+  deleteContact = id => {
+    const deletedContact = this.state.contacts.find(
+      contact => contact.id === id
+    );
+    if (deletedContact) {
+      this.setState(state => ({
+        contacts: state.contacts.filter(contact => contact.id !== id),
+      }));
+      alert(`${deletedContact.name} has beedn removed!`);
+    }
+  };
+
   render() {
     const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(contact =>
@@ -72,7 +84,10 @@ export default class App extends Component {
         </Section>
         <Section title={'Contacts'}>
           <InputFiltr value={filter} onChange={this.handleFilterChange} />
-          <Contacts contacts={filteredContacts} />
+          <Contacts
+            contacts={filteredContacts}
+            handleDelete={this.deleteContact}
+          />
         </Section>
       </Container>
     );
