@@ -1,12 +1,7 @@
 import { Component } from 'react';
-import {
-  Button,
-  ContactForm,
-  ContactProfile,
-  Contacts,
-  Container,
-  Section,
-} from 'components';
+
+import { ContactForm, Contacts, Container, Section } from 'components';
+
 import { nanoid } from 'nanoid';
 
 export default class App extends Component {
@@ -17,14 +12,13 @@ export default class App extends Component {
       { id: 'id-3', name: 'Eden Clements' },
     ],
     name: '',
-    filter: '',
   };
 
   addNewContact = e => {
     const form = e.target;
     const {
       name: { value: name },
-    } = form.element;
+    } = form.elements;
 
     const existingContact = this.checkIfContactExist(name);
 
@@ -36,7 +30,9 @@ export default class App extends Component {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, newContact],
       }));
+      form.reset();
     }
+
     e.preventDefault();
   };
 
@@ -48,17 +44,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { contacts, filter } = this.state;
-    const filtredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLocaleLowerCase())
-    );
+    const { contacts } = this.state;
     return (
       <Container>
         <Section title={'Phonebook'}>
           <ContactForm handler={this.addNewContact} />
         </Section>
         <Section title={'Contacts'}>
-          <Contacts contacts={filtredContacts} />
+          <Contacts contacts={contacts} />
         </Section>
       </Container>
     );
